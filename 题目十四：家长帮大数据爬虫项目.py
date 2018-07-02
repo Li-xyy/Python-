@@ -31,25 +31,10 @@ for i in range(len(ls2)):
     print('省份:{},编号:{}'.format(ls1[i],ls2[i]))
 
 
-
-"""
-#####################my
-for i in ls:
-    data='id={}&type=2&city=61&state=1'.format(i).encode()
-    req=r.Request(url,data=data,headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36','X-Requested-With':'XMLHttpRequest'})
-    d=r.urlopen(req).read().decode('utf-8','ignore')
-    ls1=re.compile('"plan":\S(.*?)\S,').findall(d)
-    f=open('./a.csv','w')
-    f.write(ls1+"\n")
-    f.close()
- """  
-   
  
- 
+ #3
 import urllib.request as r
 import json
-
-
 f=open('./rs.txt','w')
 for i in ls:
     url='http://www.gaokaopai.com/university-ajaxGetMajor.html '
@@ -58,11 +43,6 @@ for i in ls:
     d=r.urlopen(req).read().decode('utf-8','ignore')
     f.write(d+'\n')
 f.close()
-
-
-##################################
-import urllib.request as r
-import json
 
 
 f=open('./rs1.txt','w')
@@ -95,7 +75,7 @@ f.close()
 
 
 
-        data1=json.loads(d)
+
     
     
     
