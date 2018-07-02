@@ -35,42 +35,33 @@ for i in range(len(ls2)):
  #3
 import urllib.request as r
 import json
-f=open('./rs.txt','w')
-for i in ls:
-    url='http://www.gaokaopai.com/university-ajaxGetMajor.html '
-    data='id={}&type=2&city=61&state=1'.format(i).encode()
-    req=r.Request(url,data=data,headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36','X-Requested-With':'XMLHttpRequest'})
-    d=r.urlopen(req).read().decode('utf-8','ignore')
-    f.write(d+'\n')
-f.close()
-
-
-f=open('./rs1.txt','w')
+  
+m=[]   
 for i in range(2300):
     url='http://www.gaokaopai.com/university-ajaxGetMajor.html '
-    data='id={}&type=2&city=61&state=1'.format(ls[i]).encode()
+    data='id={}&type=2&city=62&state=1'.format(ls[i])
+    data=data.encode()
     req=r.Request(url,data=data,headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36','X-Requested-With':'XMLHttpRequest'})
-    d=r.urlopen(req).read().decode('utf-8','ignore')
-    print('{}'.format(i))
-    f.write(d+'\n')
-f.close()
-
-f=open('./rs3.txt','w')
-for i in range(2300):
-    try:
+    p=r.urlopen(req).read().decode('utf-8','ignore')
+    m.append(p)
+    a=m[i]
+    if a.startswith('<!DOCTYPE html>'):
+        print('第{}存在错误'.format(i))
         url='http://www.gaokaopai.com/university-ajaxGetMajor.html '
-        data='id={}&type=2&city=61&state=1'.format(ls[i]).encode()
+        data='id={}&type=2&city=62&state=1'.format(ls[i])
+        data=data.encode()
         req=r.Request(url,data=data,headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36','X-Requested-With':'XMLHttpRequest'})
-        d=r.urlopen(req).read().decode('utf-8','ignore')
-        ls3=json.loads(d)
-        for i in range(len(ls3['data'])):
-            a1=ls3['data'][i]
-            f.write('{}'.format(a1))
-        f.write('\n')
-    except Exception as err:
-        print('')    
+        p=r.urlopen(req).read().decode('utf-8','ignore')
+        m[i]=p
+    else:
+        a=i
+        print('{}次输出成功'.format(a))
+        continue
+f=open('./rs1.txt','w',encoding='utf-8')
+for i in range(len(m)):
+    p=m[i]
+    f.write(p+"\n")
 f.close()
-
 
 
 
